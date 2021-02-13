@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+mainClassName = 'yasl4j.SL'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def executableBaseName = "yasl4j"
+
+task fatJar(type: Jar, dependsOn: jar)  {
+    manifest {
+        attributes 'Main-Class' : mainClassName
+    }
+    archivesBaseName = "${executableBaseName}-all-in-one"
+
+    from { configurations.compileClasspath .collect {it.isDirectory() ? it : zipTree(it)} }
+    with jar
+}
+
+dependencies {
+    implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
+    implementation group: 'javazoom', name: 'jlayer', version: '1.0.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
