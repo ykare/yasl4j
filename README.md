@@ -25,8 +25,7 @@ If you are in a WSL2 environment on Windows, you can run it without javaw. [Here
 GraalVM's native-image allows you to use **sl** command with the same usability as the original.
 
 ```bash
-native-image -jar build/libs/yasl4j-all-in-one-X.X.X-SNAPSHOT.jar
-mv yasl4j-all-in-one-1.0-SNAPSHOT sl
+native-image -jar build/libs/yasl4j-all-in-one-X.X.X-SNAPSHOT.jar -H:Name=sl
 ./sl # execute yasl4j
 ```
 
